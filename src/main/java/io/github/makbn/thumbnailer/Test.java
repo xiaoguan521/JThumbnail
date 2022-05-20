@@ -17,7 +17,7 @@ public class Test {
         try {
             AppSettings.init(args);
             Thumbnailer.start();
-            File in = new File("/Users/mehdiakbarian-rastaghi/Documents/Projects/Sakku/gharardad.docx");
+            File in = new File("C:\\Users\\xiaochen\\Desktop\\123.docx");
             if(in.exists()) {
                 ThumbnailCandidate candidate = new ThumbnailCandidate(in,"unique_code");
 
@@ -32,6 +32,9 @@ public class Test {
                         System.out.println(message);
                     }
                 });
+            }else{
+                System.out.println("没有找到文件" +
+                        "");
             }
         } catch (IOException e) {
             e.printStackTrace();

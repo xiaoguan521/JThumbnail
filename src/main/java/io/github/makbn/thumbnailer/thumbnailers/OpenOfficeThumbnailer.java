@@ -50,6 +50,7 @@ public class OpenOfficeThumbnailer extends AbstractThumbnailer {
 
     @Override
     public void generateThumbnail(File input, File output) throws IOException, ThumbnailerException {
+        //这里分为了两种情况，使用JODConverter 和openoffice转换成了pdf 和ods 两种文件
         if (FilenameUtils.getExtension(input.getName()).equalsIgnoreCase("pdf")) {
             pdfBoxThumbnailer.generateThumbnail(input, output);
         } else {
@@ -57,6 +58,11 @@ public class OpenOfficeThumbnailer extends AbstractThumbnailer {
             ZipFile zipFile = null;
 
             try {
+                //这里的input 是一个ods文件，ods文件中包含了图片以及缩略图的信息
+                //这里还有以下内容可以完善，1均使用pdf的方式转换 参考https://blog.csdn.net/qq_33697094/article/details/113559873
+                //2.使用coobrid/Thumbnailator 做进一步的处理（对图片做缩略图）
+                //3.使用阿里的ffmpeg 生成视频的缩略图https://cloud.tencent.com/developer/article/1810395
+                //4.使用淘宝使用的GraphicsMagick 做动态缩略图 http://blog.fangshuoit.com/?p=157
                 zipFile = new ZipFile(input);
             } catch (ZipException e) {
                 logger.warn("OpenOfficeThumbnailer", e);
